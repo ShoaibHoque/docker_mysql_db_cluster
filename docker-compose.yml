@@ -1,0 +1,39 @@
+version: "3.3"
+services:
+  bal-node1:
+    build: .
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password 
+    volumes:
+      - ./bal-data1:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  bal-node2:
+    build: .
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password 
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./bal-data2:/var/lib/mysql
+
+  bal-node3:
+    build: .
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password 
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./bal-data3:/var/lib/mysql
+
+volumes:
+  bal-data1:
+    driver: local
+  bal-data2:
+    driver: local
+  bal-data3:
+    driver: local
